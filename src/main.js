@@ -1,10 +1,14 @@
 import L from "leaflet";
 
-const map = L.map("map").setView([53.9, -3.9], 6);
+const map = L.map("map", { tap: false, inertia: false }).setView(
+    [53.9, -3.9],
+    6
+);
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     minZoom: 2,
     maxZoom: 16,
+    detectRetina: true,
 }).addTo(map);
 // L.tileLayer(
 //   "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png",
@@ -39,10 +43,10 @@ fetch(import.meta.env.BASE_URL + "/hospitals.csv")
                 .join("");
 
             const popupContent = `
-        <b>${name}</b><br>
-        <i>${person}</i><br>
-        <ul>${equipmentList}</ul>
-      `;
+                <b>${name}</b><br>
+                <i>${person}</i><br>
+                <ul>${equipmentList}</ul>
+            `;
 
             const marker = L.marker([latNum, lngNum]).addTo(map);
             marker.bindPopup(popupContent, {
@@ -68,13 +72,15 @@ fetch(import.meta.env.BASE_URL + "/hospitals.csv")
 
             // Click: toggle pinned state
             marker.on("click", function () {
-                if (popupPinned) {
-                    this.closePopup();
-                    popupPinned = false;
-                } else {
-                    this.openPopup();
-                    popupPinned = true;
-                }
+                // if (popupPinned) {
+                //     this.closePopup();
+                //     popupPinned = false;
+                // } else {
+                //     this.openPopup();
+                //     popupPinned = true;
+                // }
+                this.openPopup();
+                popupPinned = true;
             });
 
             // When popup is manually closed (e.g. with the X button)
@@ -94,10 +100,13 @@ fetch(import.meta.env.BASE_URL + "/hospitals.csv")
 var popup = L.popup();
 
 function onMapClick(e) {
-    popup
-        .setLatLng(e.latlng)
-        .setContent("You clicked the map at " + e.latlng.toString())
-        .openOn(map);
+    console.log(e);
+    var content = /*html*/ `<p>You clicked the map at</p>
+            <p style="text-align:center;">
+            ${e.latlng.lat.toFixed(4).toString()},
+            ${e.latlng.lng.toFixed(4).toString()}
+            </p>`;
+    popup.setLatLng(e.latlng).setContent(content).openOn(map);
 }
 
 map.on("click", onMapClick);
