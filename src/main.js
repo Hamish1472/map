@@ -1,9 +1,6 @@
 import L from "leaflet";
 
-const map = L.map("map", { tap: false, inertia: false }).setView(
-    [53.9, -3.9],
-    6
-);
+const map = L.map("map").setView([53.9, -3.9], 6);
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     minZoom: 2,
