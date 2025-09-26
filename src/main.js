@@ -15,7 +15,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 // ).addTo(map);
 
 // Load CSV
-fetch("/data/hospitals.csv")
+fetch(import.meta.env.BASE_URL + "/hospitals.csv")
     .then((response) => response.text())
     .then((text) => {
         const lines = text.trim().split("\n");
