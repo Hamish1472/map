@@ -1,0 +1,16 @@
+[
+    {
+        "hospital": "Northern General",
+        "latitude": 53.410427,
+        "longitude": -1.457405,
+        "equipment": ["Pacemaker", "Stent"],
+        "assigned_person": "Alasdair Dixon"
+    },
+    {
+        "hospital": "James Cook",
+        "latitude": 54.552043,
+        "longitude": -1.213732,
+        "equipment": ["Defibrillator", "idk what else", "3rd item"],
+        "assigned_person": "Martyn Dixon"
+    }
+]

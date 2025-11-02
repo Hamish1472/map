@@ -2,43 +2,21 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
+        <link
+            rel="icon"
+            href="/cardiologic.ico"
+        />
         <meta
             name="viewport"
-            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+            content="width=device-width, initial-scale=1.0"
         />
-
-        <title>map</title>
-        <link
-            rel="stylesheet"
-            href="src/style.css"
-        />
-        <link
-            rel="stylesheet"
-            href="https://unpkg.com/leaflet/dist/leaflet.css"
-        />
+        <title>Cardiologic</title>
     </head>
     <body>
-        <body>
-            <div id="app">
-                <div id="map">
-                    <button id="toggle-table">▲ Hide Table</button>
-                </div>
-                <div id="table-container">
-                    <table id="hospital-table">
-                        <thead></thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-            <script
-                type="module"
-                src="/src/main.js"
-            ></script>
-        </body>
-
+        <div id="app"></div>
         <script
             type="module"
-            src="/src/main.js"
+            src="/src/main.ts"
         ></script>
     </body>
 </html>
