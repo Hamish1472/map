@@ -1,3 +1,4 @@
+<!-- Vue 3 (Options API) & Vuetify 3 with TypeScript -->
 <template>
     <!-- Map container -->
     <div id="map" style="height: 100%; width: 100%"></div>
@@ -17,12 +18,13 @@
                 <!-- Normal cell rendering for arrays (optional, could remove if expanded) -->
                 <template v-slot:item.equipment="{ item }">
                     <span>
-                        {{ item.equipment[0] }}
-                        <template v-if="item.equipment.length > 1">
-                            +{{ item.equipment.length - 1 }} more
+                        {{ item.equipment.slice(0, itemsToShow).join(', ') }}
+                        <template v-if="item.equipment.length > itemsToShow">
+                            +{{ item.equipment.length - itemsToShow }} more
                         </template>
                     </span>
                 </template>
+
 
                 <!-- <template v-slot:item.assigned_people="{ item }">
                 <span>
@@ -59,7 +61,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, toRaw } from 'vue'
+import { defineComponent, toRaw, computed } from 'vue';
+import { useDisplay } from 'vuetify';
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import hospitalsData from '@/assets/hospitals.json';
@@ -93,6 +96,17 @@ interface DataTableRowEvent<T> {
 }
 
 export default defineComponent({
+    setup() {
+        const display = useDisplay()
+        const itemsToShow = computed(() => {
+            if (display.xs.value) return 1
+            if (display.sm.value) return 2
+            if (display.md.value) return 3
+            if (display.lg.value) return 4
+            return 5
+        })
+        return { itemsToShow }
+    },
     data() {
         return {
             headers: [
@@ -208,6 +222,17 @@ export default defineComponent({
             });
         },
     },
+    // computed: {
+    //     itemsToShow(): number {
+    //         const { xs, sm, md, lg } = useDisplay()
+    //         if (xs.value) return 1
+    //         if (sm.value) return 2
+    //         if (md.value) return 3
+    //         if (lg.value) return 4
+    //         return 5
+    //     }
+    // },
+
 
     mounted() {
         this.initMap();
